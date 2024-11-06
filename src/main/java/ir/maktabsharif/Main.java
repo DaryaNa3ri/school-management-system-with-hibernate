@@ -4,6 +4,7 @@ import ir.maktabsharif.exeption.IdNotFoundException;
 import ir.maktabsharif.model.Student;
 import ir.maktabsharif.repository.StudentRepository;
 import ir.maktabsharif.repository.impl.StudentRepositoryImpl;
+import ir.maktabsharif.thread.TwoMSThread;
 import ir.maktabsharif.util.EntityManagerProvider;
 
 import javax.persistence.EntityManager;
@@ -56,6 +57,26 @@ public class Main {
         }*/
 
         //list.ifPresent(System.out::println);
+
+
+
+
+
+
+        Optional<List<Student>> all = studentRepository.findAll();
+
+        if (all.isPresent()) {
+            for (Student student : all.get()) {
+                TwoMSThread twoMSThread = new TwoMSThread();
+                twoMSThread.start();
+                    System.out.println(student);
+                try {
+                    twoMSThread.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
 
     }
 
