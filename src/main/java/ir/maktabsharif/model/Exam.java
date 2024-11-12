@@ -1,12 +1,10 @@
 package ir.maktabsharif.model;
 
-import com.sun.xml.bind.v2.model.core.ID;
-import ir.maktabsharif.base.model.BaseEntity;
+import ir.maktabsharif.model.base.BaseEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @SuperBuilder
-@Table(name = "exam")
+@Table(name = "exams")
 public class Exam extends BaseEntity<Long> {
 
     @Column(name = "exam_title")

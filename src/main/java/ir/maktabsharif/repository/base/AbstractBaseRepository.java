@@ -1,8 +1,8 @@
-package ir.maktabsharif.base.repository;
+package ir.maktabsharif.repository.base;
 
 
 import ir.maktabsharif.util.ResultWrapper;
-import ir.maktabsharif.base.model.BaseEntity;
+import ir.maktabsharif.model.base.BaseEntity;
 import ir.maktabsharif.exeption.IdNotFoundException;
 import ir.maktabsharif.util.EntityManagerProvider;
 
@@ -15,16 +15,15 @@ import java.util.Optional;
 public abstract class AbstractBaseRepository<T extends BaseEntity<ID>, ID extends Serializable> implements BaseRepository<T, ID> {
 
     private EntityManager entityManager = EntityManagerProvider.getEntityManager();
-    private EntityTransaction transaction = entityManager.getTransaction();
 
     @Override
     public ResultWrapper<ID> insert(T entity) {
         try {
-            transaction.begin();
+            entityManager.getTransaction().begin();
             entityManager.persist(entity);
-            transaction.commit();
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            transaction.rollback();
+            entityManager.getTransaction().rollback();
             return ResultWrapper.err(e.getMessage());
         }
         return ResultWrapper.ok(entity.getId());
@@ -33,48 +32,50 @@ public abstract class AbstractBaseRepository<T extends BaseEntity<ID>, ID extend
     @Override
     public Optional<Boolean> update(T entity) {
         try {
-            transaction.begin();
+            entityManager.getTransaction().begin();
             entityManager.merge(entity);
-            transaction.commit();
+            entityManager.getTransaction().commit();
             return Optional.of(Boolean.TRUE);
         } catch (Exception e) {
-            transaction.rollback();
+            entityManager.getTransaction().rollback();
             return Optional.of(Boolean.FALSE);
         }
     }
 
     //@SuppressWarnings("unchecked")
     @Override
-    public Optional<List<T>> findAll() {
+    public List<T> findAll() {
         String str = "select * from ".concat(tableName());
         Query query = entityManager.createNativeQuery(str, classType());
+        //Query query = entityManager.createQuery("SELECT COUNT(s) FROM Student s");
+        //
         List<T> resultList = query.getResultList();
-        return Optional.of(resultList);
+        return resultList;
     }
 
 
     @Override
     public Optional<T> findById(ID id) {
-        transaction.begin();
+        entityManager.getTransaction().begin();
         Optional<T> optional = Optional.of(entityManager.find(classType(), id));
-        transaction.commit();
+        entityManager.getTransaction().commit();
         return optional;
     }
 
 
     @Override
     public Optional<Boolean> delete(ID id) throws IdNotFoundException {
-        Optional<T> byId = this.findById(id);
+        Optional<T> foundObject = this.findById(id);
         Optional<Boolean> isDeleted;
-        if (byId.isPresent()) {
+        if (foundObject.isPresent()) {
             try {
                 entityManager.getTransaction().begin();
-                entityManager.remove(byId.get());
+                entityManager.remove(foundObject.get());
                 entityManager.getTransaction().commit();
                 isDeleted = Optional.of(true);
                 return isDeleted;
             } catch (Exception e) {
-                transaction.rollback();
+                entityManager.getTransaction().rollback();
             }
         } else {
             throw new IdNotFoundException("finding id was unsuccessfully");

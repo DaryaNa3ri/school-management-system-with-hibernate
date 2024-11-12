@@ -1,7 +1,11 @@
 package ir.maktabsharif.repository;
 
-import ir.maktabsharif.base.repository.BaseRepository;
+import ir.maktabsharif.repository.base.BaseRepository;
 import ir.maktabsharif.model.Student;
 
+import java.util.List;
+
 public interface StudentRepository extends BaseRepository<Student,Long> {
+    //List<Student> findByFirstName(String firstName);
+
 }

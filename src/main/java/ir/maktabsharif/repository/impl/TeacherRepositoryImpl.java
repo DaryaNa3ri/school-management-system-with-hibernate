@@ -1,6 +1,6 @@
 package ir.maktabsharif.repository.impl;
 
-import ir.maktabsharif.base.repository.AbstractBaseRepository;
+import ir.maktabsharif.repository.base.AbstractBaseRepository;
 import ir.maktabsharif.model.Teacher;
 import ir.maktabsharif.repository.TeacherRepository;
 
@@ -13,6 +13,6 @@ public class TeacherRepositoryImpl extends AbstractBaseRepository<Teacher,Long> 
 
     @Override
     public String tableName() {
-        return "teacher";
+        return "teachers";
     }
 }

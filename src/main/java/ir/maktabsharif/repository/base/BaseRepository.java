@@ -1,7 +1,7 @@
-package ir.maktabsharif.base.repository;
+package ir.maktabsharif.repository.base;
 
 import ir.maktabsharif.util.ResultWrapper;
-import ir.maktabsharif.base.model.BaseEntity;
+import ir.maktabsharif.model.base.BaseEntity;
 import ir.maktabsharif.exeption.IdNotFoundException;
 
 import java.io.Serializable;
@@ -18,6 +18,6 @@ public interface BaseRepository <T extends BaseEntity<ID>,ID extends Serializabl
 
     Optional<T> findById(ID id) ;
 
-    Optional<List<T>> findAll() ;
+    List<T> findAll() ;
 
 }

@@ -1,39 +1,23 @@
 package ir.maktabsharif.model;
 
-import com.sun.xml.bind.v2.model.core.ID;
-import ir.maktabsharif.base.model.BaseEntity;
+import ir.maktabsharif.model.base.BaseEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 @EqualsAndHashCode(callSuper = true)
+@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @SuperBuilder
-@Table(name = "student")
-public class Student extends BaseEntity<Long> {
-
-
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Column(name = "national_code",unique = true)
-    private String nationalCode;
-
-    @Temporal(TemporalType.DATE)
-    private Date dob;
+//@NamedQuery(name = "Student.findByFirstName",query = "FROM Student WHERE firstName = ?1")
+@Table(name = "students")
+public class Student extends User{
 
     private Double gpu;
 
@@ -43,7 +27,7 @@ public class Student extends BaseEntity<Long> {
             joinColumns = {@JoinColumn(name = "fk_student")},
             inverseJoinColumns = {@JoinColumn(name = "fk_course")}
     )
-    private List<Course> courses = new ArrayList<>();
+    private final List<Course> courses = new ArrayList<>();
 
 
     @ManyToMany
@@ -52,7 +36,7 @@ public class Student extends BaseEntity<Long> {
             joinColumns = {@JoinColumn(name = "fk_student")},
             inverseJoinColumns = {@JoinColumn(name = "fk_teacher")}
     )
-    private List<Teacher> teachers = new ArrayList<>();
+    private final List<Teacher> teachers = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -60,5 +44,5 @@ public class Student extends BaseEntity<Long> {
             joinColumns = {@JoinColumn(name = "fk_student")},
             inverseJoinColumns = {@JoinColumn(name = "fk_exam")}
     )
-    private List<Exam> exams = new ArrayList<>();
+    private final List<Exam> exams = new ArrayList<>();
 }

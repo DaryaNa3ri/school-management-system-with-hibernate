@@ -1,12 +1,10 @@
 package ir.maktabsharif.model;
 
-import com.sun.xml.bind.v2.model.core.ID;
-import ir.maktabsharif.base.model.BaseEntity;
+import ir.maktabsharif.model.base.BaseEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +13,9 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @ToString
-
 @AllArgsConstructor
 @SuperBuilder
-@Table(name = "course")
+@Table(name = "courses")
 public class Course extends BaseEntity<Long> {
 
     @Column(name = "course_title")

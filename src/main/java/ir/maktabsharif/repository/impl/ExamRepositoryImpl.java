@@ -1,6 +1,6 @@
 package ir.maktabsharif.repository.impl;
 
-import ir.maktabsharif.base.repository.AbstractBaseRepository;
+import ir.maktabsharif.repository.base.AbstractBaseRepository;
 import ir.maktabsharif.model.Exam;
 import ir.maktabsharif.repository.ExamRepository;
 
@@ -12,6 +12,6 @@ public class ExamRepositoryImpl extends AbstractBaseRepository<Exam,Long> implem
 
     @Override
     public String tableName() {
-        return "exam";
+        return "exams";
     }
 }

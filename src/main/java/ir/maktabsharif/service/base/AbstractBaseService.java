@@ -1,6 +1,4 @@
-package ir.maktabsharif.base.service;
-
-import ir.maktabsharif.base.repository.BaseRepository;
+package ir.maktabsharif.service.base;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package ir.maktabsharif.base.model;
+package ir.maktabsharif.model.base;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -15,7 +15,7 @@ import java.util.Date;
 @ToString
 @SuperBuilder
 @MappedSuperclass
-public class BaseEntity<ID extends Serializable> implements Serializable {
+public abstract class BaseEntity<ID extends Serializable> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
