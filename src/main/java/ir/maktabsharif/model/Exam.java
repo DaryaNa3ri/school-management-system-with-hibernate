@@ -34,7 +34,7 @@ public class Exam extends BaseEntity<Long> {
 
     @ManyToOne
     @JoinColumn(name = "fk_course")
-    private Course  course;
+    private Course course;
 
     @ManyToMany(mappedBy = "exams")
     private List<Student> students = new ArrayList<>();

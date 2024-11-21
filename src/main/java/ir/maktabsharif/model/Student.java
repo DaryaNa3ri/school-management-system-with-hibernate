@@ -1,12 +1,10 @@
 package ir.maktabsharif.model;
 
-import ir.maktabsharif.model.base.BaseEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)

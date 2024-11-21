@@ -22,11 +22,11 @@ public abstract class AbstractBaseRepository<T extends BaseEntity<ID>, ID extend
             entityManager.getTransaction().begin();
             entityManager.persist(entity);
             entityManager.getTransaction().commit();
+            return ResultWrapper.ok(entity.getId());
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             return ResultWrapper.err(e.getMessage());
         }
-        return ResultWrapper.ok(entity.getId());
     }
 
     @Override

@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Entity
 @Setter
 @Getter
@@ -16,8 +17,7 @@ import java.util.Date;
 @SuperBuilder
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@PrimaryKeyJoinColumn(name = "id" ,referencedColumnName = "id")
-public class User extends BaseEntity<Long> {
+public abstract class User extends BaseEntity<Long> {
     @Column(name = "first_name")
     private String firstName;
 

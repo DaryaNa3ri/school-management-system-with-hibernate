@@ -30,6 +30,7 @@ public class Main {
         ResultWrapper<Long> john = studentRepository.insert(Student
                 .builder()
                 .firstName("John")
+                        .lastName("Doe")
                 .gpu(12.2)
                 .gender(Gender.MALE)
                 .build());
@@ -37,7 +38,10 @@ public class Main {
 
 
 
-        System.out.println(john);
+        //System.out.println(john);
+
+        List<Student> list = studentRepository.findStudentByFirstNameAndLastName("John", "Doe");
+        System.out.println(list);
     }
 
 
